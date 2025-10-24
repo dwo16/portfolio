@@ -153,3 +153,168 @@ body {
   .nav-links { gap: 14px; }
   .contact-icons { flex-direction: column; }
 }
+/* ------------------  DESIGN TOKENS  ------------------ */
+:root{
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #0f172a;       /* slate-950 */
+  --muted: #64748b;      /* slate-500 */
+  --line: #e5e7eb;       /* slate-200 */
+  --brand: #16a34a;      /* green-600 */
+  --brand-ink: #0b5b2b;
+  --ring: 0 0 0 6px rgba(22,163,74,.08);
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(2,6,23,.08), 0 2px 10px rgba(2,6,23,.05);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1020;
+    --surface:#0f172a;
+    --text:#e5e7eb;
+    --muted:#9aa6b2;
+    --line:#1f2a3a;
+    --brand:#22c55e;
+    --brand-ink:#052e16;
+    --shadow: 0 12px 28px rgba(0,0,0,.35);
+  }
+}
+
+/* ------------------  BASE  ------------------ */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container{width:min(1080px,92%); margin:0 auto; padding:40px 0 72px}
+.site-title{letter-spacing:.6px; font-weight:800; text-align:center; font-size:clamp(22px,2.2vw,28px); margin: 8px 0 18px}
+
+/* ------------------  NAV  ------------------ */
+.navbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{width:min(1080px,92%); margin:0 auto; display:flex; align-items:center; gap:16px; padding:14px 0}
+.nav-inner strong{font-weight:900; letter-spacing:.4px}
+.nav-links{list-style:none; display:flex; gap:22px; margin-left:auto}
+.nav-links a{
+  position:relative; text-decoration:none; color:var(--muted); font-weight:700; letter-spacing:.2px; padding:6px 2px; transition:color .2s ease;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after,
+.nav-links a:hover::after{
+  content:""; position:absolute; left:0; right:0; bottom:-8px; height:3px; border-radius:2px;
+  background: linear-gradient(90deg, var(--brand), color-mix(in srgb, var(--brand) 30%, transparent));
+}
+
+/* ------------------  HEADINGS & TEXT  ------------------ */
+.h1{
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.2px;
+  font-size:clamp(32px,3.4vw,44px);
+  margin: 6px 0 10px;
+}
+.eyebrow{
+  display:block; text-align:center; color:var(--brand); font-weight:800; letter-spacing:.14em;
+  text-transform:uppercase; font-size:12px; margin-bottom:10px;
+}
+.subtle{
+  text-align:center; color:var(--muted); margin:8px auto 26px; max-width:78ch; font-size:clamp(15px,1.5vw,17px)
+}
+
+/* ------------------  CARDS / SURFACES  ------------------ */
+.panel{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(18px,2.4vw,28px);
+}
+.panel + .panel{margin-top:14px}
+
+/* ------------------  GRID / IMAGES  ------------------ */
+.photo-grid{
+  --gap: 16px;
+  display:grid; gap:var(--gap); align-items:start;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+}
+.photo-grid > *{min-width:0}
+.col-12{grid-column: span 12}
+.col-6{grid-column: span 6}
+.col-4{grid-column: span 4}
+
+.photo-grid img{
+  width:100%; height:auto; display:block; border-radius:12px;
+  background: #e5e7eb;
+  border:1px solid var(--line);
+  box-shadow: 0 4px 18px rgba(2,6,23,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.photo-grid img:hover{ transform: translateY(-4px); box-shadow: 0 10px 28px rgba(2,6,23,.12) }
+
+.copy{ color:var(--muted); font-size:16px }
+.copy p + p{ margin-top:10px }
+
+/* ------------------  SECTIONS  ------------------ */
+.section{ margin: 46px 0 10px }
+.section h2{
+  font-size: clamp(18px,2vw,22px);
+  font-weight: 900;
+  letter-spacing:.3px;
+  text-align:center;
+  margin-bottom: 12px;
+}
+.section .blurb{
+  text-align:center; color:var(--muted); max-width:86ch; margin:0 auto 16px;
+}
+
+/* ------------------  ABOUT HERO  ------------------ */
+.hero{
+  display:grid; gap:16px; justify-items:center; margin:10px 0 8px;
+}
+.hero .lead{
+  max-width: 70ch; text-align:center; color:var(--muted); font-size: clamp(17px, 1.9vw, 19px);
+}
+.badge{
+  display:inline-block; background: color-mix(in srgb, var(--brand) 18%, var(--surface));
+  border:1px solid color-mix(in srgb, var(--brand) 35%, var(--line));
+  color: var(--brand-ink); padding:6px 10px; border-radius:999px; font-weight:800; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+}
+
+/* ------------------  WORK PLACEHOLDERS  ------------------ */
+.placeholder{
+  aspect-ratio: 4/5;
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--surface) 90%, var(--line)) 0 16px, var(--surface) 16px 32px);
+  border:1px solid var(--line); border-radius:12px; display:grid; place-items:center; color:var(--muted); font-weight:700;
+  box-shadow: var(--shadow);
+}
+
+/* ------------------  CONTACT  ------------------ */
+.contact-icons{
+  display:flex; flex-wrap:wrap; gap:18px; justify-content:center; align-items:center; margin: 26px 0 12px;
+}
+.contact-icons a{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  color:var(--text); background:var(--surface); border:1px solid var(--line);
+  padding:10px 14px; border-radius:999px; font-weight:800; box-shadow: var(--shadow); transition: transform .2s ease;
+}
+.contact-icons a:hover{ transform: translateY(-2px); }
+.contact-note{ text-align:center; color:var(--muted); margin-top:8px }
+
+/* ------------------  FOOTER  ------------------ */
+.footer{
+  text-align:center; color:var(--muted); border-top:1px solid var(--line);
+  padding:22px 0; margin-top:56px; font-size:14px;
+}
+
+/* ------------------  MOTION  ------------------ */
+@keyframes fadeUp{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+.container > *{ animation: fadeUp .4s ease both; }
